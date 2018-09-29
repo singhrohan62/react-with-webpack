@@ -1,0 +1,47 @@
+Webpack 4 Tutorial
+
+>>Webpack 4 assumes the entry point to be src/index.js by default
+
+>>The entry point is the file webpack looks for to start building your Javascript bundle.
+
+>>webpack 4 doesn’t need a configuration file.
+
+It will look in ./src/index.js as the default entry point. Moreover, it will spit out the bundle in ./dist/main.js.
+
+>>webpack 4 introduces production and development mode.
+
+Production mode enables all sorts of optimizations out of the box. Including minification, scope hoisting, tree-shaking and more.
+
+Development mode on the other hand is optimized for speed and does nothing more than providing an un-minified bundle.
+
+>>Not every browser know how to deal with ES6. We need some kind of transformation.
+
+This transformation step is called transpiling. Transpiling is the act of taking ES6 and making it understandable by older browsers.
+
+babel-loader is the webpack loader for transpiling ES6 and above, down to ES5.
+
+To start using the loader we need to install a bunch of dependencies. In particular:
+
+babel core
+babel loader
+babel preset env for compiling Javascript ES6 code down to ES5
+
+At this point we have 2 options for configuring babel-loader:
+
+using a configuration file for webpack
+using --module-bindin your npm scripts
+
+The concept of zero configuration in webpack 4 applies to:
+
+the entry point. Default to ./src/index.js
+the output. Default to ./dist/main.js
+production and development mode (no need to create 2 separate confs for production and development)
+
+But for using loaders in webpack 4 you still have to create a configuration file.
+
+The --module-bind flag lets you specify loaders from the command line.
+
+	"scripts": {
+    "dev": "webpack --mode development --module-bind js=babel-loader",
+    "build": "webpack --mode production --module-bind js=babel-loader"
+  }
